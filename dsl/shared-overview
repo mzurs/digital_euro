@@ -1,0 +1,95 @@
+workspace "Digital Euro Hybrid Integration" "Architecture showing multiple PSPs sharing an integration layer while segregating core banking and liquidity (DCA)." {
+
+    model {
+        # Actors
+        user = person "Digital Euro User" "A bank customer using their mobile wallet."
+        
+        # --- The Eurosystem (DESP) ---
+        eurosystem = softwareSystem "Digital Euro Service Platform (DESP)" "The central settlement engine managed by the Eurosystem." {
+            accessGateway = container "Digital Euro Access Gateway" "Entry point for PSPs" "gRPC/mTLS"
+            settlementEngine = container "Settlement Engine" "Manages central ledger and unspent transaction outputs"
+            dcaA = container "Bank A's DCA" "Dedicated Cash Account (DCA) for Bank A (Central Bank Money)"
+            dcaB = container "Bank B's DCA" "Dedicated Cash Account (DCA) for Bank B (Central Bank Money)"
+        }
+
+        # --- The Shared Integration Platform (Multi-Tenant) ---
+        sharedService = softwareSystem "Shared Integration Platform" "A multi-tenant platform shared by multiple PSPs to mutualise integration costs." {
+            apiGateway = container "API Gateway" "Routes traffic and handles auth based on PSP ID" "Nginx/Kong"
+            
+            deGateway = container "Digital Euro Gateway Service" "Microservice handling DESP logic (Multi-tenant, highly segregated)" "Java/Spring Boot" {
+                component "Liquidity Manager" "Routes Reverse Waterfall requests to the correct PSP's CBS/Treasury"
+                component "gRPC Client" "Stub for DESP communication"
+            }
+        }
+
+        # --- Commercial Bank A (Segregated Infrastructure) ---
+        bankA = softwareSystem "Commercial Bank A" "PSP 1 using the Shared Platform." {
+            mobileAppA = container "Bank A Mobile App" "Frontend for users"
+            cbsA = container "Core Banking System A" "System of Record for Commercial Money"
+            treasuryA = container "Treasury System A" "Manages liquidity for Bank A's DCA"
+        }
+
+        # --- Commercial Bank B (Segregated Infrastructure) ---
+        bankB = softwareSystem "Commercial Bank B" "PSP 2 using the Shared Platform." {
+            mobileAppB = container "Bank B Mobile App" "Frontend for users"
+            cbsB = container "Core Banking System B" "System of Record for Commercial Money"
+            treasuryB = container "Treasury System B" "Manages liquidity for Bank B's DCA"
+        }
+
+        # --------------------------------
+        # --- Relationships (Flows) ---
+        # --------------------------------
+        
+        // 1. User flow into the Shared Platform
+        user -> mobileAppA "Initiates Payment"
+        user -> mobileAppB "Initiates Payment"
+        mobileAppA -> apiGateway "HTTPS/JSON (Routes to Shared Service)"
+        mobileAppB -> apiGateway "HTTPS/JSON (Routes to Shared Service)"
+        apiGateway -> deGateway "Routes request (Identifies PSP A or B)"
+
+        // 2. Shared Platform to Segregated Bank A Infrastructure (e.g., Reverse Waterfall)
+        deGateway -> cbsA "Locks funds (Reverse Waterfall)" "Internal Event Bus"
+        deGateway -> treasuryA "Requests DCA liquidity top-up" "MQ Series"
+        
+        // 3. Shared Platform to Segregated Bank B Infrastructure (e.g., Reverse Waterfall)
+        deGateway -> cbsB "Locks funds (Reverse Waterfall)" "Internal Event Bus"
+        deGateway -> treasuryB "Requests DCA liquidity top-up" "MQ Series"
+
+        // 4. Shared Platform to DESP Access Gateway (to manage specific DCAs)
+        deGateway -> accessGateway "Instructs Funding/Defunding for Bank A" "gRPC/Protobuf (mTLS)"
+        deGateway -> accessGateway "Instructs Funding/Defunding for Bank B" "gRPC/Protobuf (mTLS)"
+
+        // 5. DESP Access Gateway to Segregated DCAs
+        accessGateway -> dcaA "Updates Bank A Ledger"
+        accessGateway -> dcaB "Updates Bank B Ledger"
+    }
+
+    views {
+        # New view focusing on the Hybrid Model
+        container sharedService "HybridModelView" "Container View highlighting the shared service's interaction with segregated bank and DESP components." {
+            include user mobileAppA mobileAppB cbsA treasuryA cbsB treasuryB deGateway apiGateway accessGateway dcaA dcaB
+            autoLayout
+        }
+
+        styles {
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Person" {
+                shape Person
+                background #08427b
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Shared Integration Platform" {
+                // Highlight the shared component differently
+                background #90EE90
+                color #000000
+            }
+        }
+    }
+}

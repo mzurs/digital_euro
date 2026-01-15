@@ -1,0 +1,123 @@
+workspace "Digital Euro Integration" "Architecture for DESP and PSP (Bank) Integration" {
+
+    model {
+        // External actors and systems
+        endUser = person "End User" "Payer or Payee"
+        pspBank = softwareSystem "PSP Bank" "Payment Service Provider (e.g., Bank)" {
+            // Containers within PSP Bank
+            frontendApp = container "Front-End App" "User interfaces (mobile/web)" "App"
+            backendSystem = container "Back-End System" "Core banking and integration logic" "Backend"
+            apiGateway = container "API Gateway" "Handles DESP communications" "API"
+            database = container "Database" "Stores user data, aliases, DEANs" "Database"
+            complianceModule = container "Compliance Module" "KYC/AML, risk management" "Module"
+        }
+
+        // Central platform: DESP
+        desp = softwareSystem "DESP" "Digital Euro Service Platform" "Central Platform" {
+            // Containers within DESP
+            accessMgmt = container "Access Management" "Onboarding, alias lookup" "Service"
+            liquidityMgmt = container "Liquidity Management" "Funding/defunding, DCAs, waterfall" "Service"
+            transactionMgmt = container "Transaction Management" "Settlement, conditional payments, offline sync" "Service"
+            settlementService = container "Settlement Service" "Processes payments" "Service"
+            aliasLookup = container "Alias Lookup" "DEAN resolution" "Service"
+        }
+
+        eurosystem = softwareSystem "Eurosystem" "ECB and NCBs" "Oversees DESP"
+
+        // Relationships (static model)
+        endUser -> frontendApp "Initiates transactions (P2P, POS, e-commerce)"
+        frontendApp -> backendSystem "Forwards requests"
+        backendSystem -> apiGateway "Routes to DESP"
+        apiGateway -> accessMgmt "Access requests (onboarding, aliases)" "HTTPS/Standard Interfaces"
+        apiGateway -> liquidityMgmt "Liquidity operations (funding, waterfall)" "HTTPS/Standard Interfaces"
+        apiGateway -> transactionMgmt "Transaction processing (conditional, offline)" "HTTPS/Standard Interfaces"
+        transactionMgmt -> settlementService "Settles payments"
+        accessMgmt -> aliasLookup "Resolves aliases to DEANs"
+        transactionMgmt -> liquidityMgmt "Checks liquidity (DCA)"
+        liquidityMgmt -> settlementService "Reserves funds"
+        desp -> backendSystem "Returns confirmations/notifications"
+        desp -> eurosystem "Oversight and management"
+
+        // Affected components in PSP Bank
+        backendSystem -> database "Stores/Retrieves data (DEANs, limits)"
+        backendSystem -> complianceModule "Validates (KYC, fraud)"
+    }
+
+    views {
+        // System Context Diagram: High-level integration
+        systemContext desp "SystemContext" {
+            include *
+            autolayout lr
+        }
+
+        // Container Diagram: Detailed structure within DESP and PSP
+        container desp "Containers_DESP" {
+            include *
+            autolayout lr
+        }
+
+        container pspBank "Containers_PSP" {
+            include *
+            autolayout lr
+        }
+
+        // Dynamic Diagram: Example transaction sequence (e.g., conditional payment)
+        dynamic desp "TransactionSequence" "Flow for a conditional payment integration" {
+            endUser -> frontendApp "Initiates payment"
+            frontendApp -> backendSystem "Processes request"
+            backendSystem -> complianceModule "Validates compliance"
+            backendSystem -> apiGateway "Sends to DESP"
+            apiGateway -> transactionMgmt "Submits conditional payment (fund reservation)"
+            transactionMgmt -> liquidityMgmt "Checks liquidity (DCA)"
+            liquidityMgmt -> settlementService "Reserves funds"
+            settlementService -> transactionMgmt "Confirms"
+            transactionMgmt -> apiGateway "Returns status"
+            apiGateway -> backendSystem "Updates"
+            backendSystem -> database "Logs"
+            backendSystem -> frontendApp "Notifies user"
+            frontendApp -> endUser "Shows completion"
+            autolayout lr
+        }
+
+        // Styles for UML-like visualization
+        styles {
+            element "Person" {
+                shape person
+            }
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Central Platform" {
+                background #ff7518
+                color #ffffff
+            }
+            element "App" {
+                shape mobileDevicePortrait
+            }
+            element "Backend" {
+                shape roundedBox
+            }
+            element "API" {
+                shape cylinder
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape cylinder
+                background #ffffff
+                color #000000
+            }
+            element "Service" {
+                shape component
+            }
+            element "Module" {
+                shape hexagon
+            }
+            relationship "HTTPS/Standard Interfaces" {
+                style dashed
+                color #dc312e
+            }
+        }
+    }
+}

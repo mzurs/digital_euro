@@ -1,0 +1,148 @@
+workspace "Microservices Bank Architecture" "Microservices-based architecture for a modern retail bank" {
+
+    model {
+
+        /*********************
+         * People (top-level)
+         *********************/
+        customer = person "Retail Customer" "Uses digital channels (mobile/web), cards and ATM for daily banking."
+        partner = person "Fintech Partner" "Integrates via open banking / partner APIs."
+
+        /*********************
+         * Channels Layer
+         *********************/
+        channels = softwareSystem "Customer Channels" "Mobile apps, web portals, ATM/POS networks" {
+            mobile_app = container "Mobile Banking App" "Native mobile app for customers." "Mobile App"
+            web_app = container "Web Banking UI" "Responsive web banking portal." "Single Page App"
+            atm_channel = container "ATM / POS Channel" "Legacy ATM/POS networks using card transactions." "Channel"
+        }
+
+        /*********************
+         * Core Microservices Platform
+         *********************/
+        bank = softwareSystem "Digital Bank Platform" "Cloud-native, microservices-based banking platform." {
+
+            /***** API Edge *****/
+            api_gateway = container "API Gateway" "Single entry point for external clients, channels and partners." "API Gateway"
+            bff_mobile = container "Mobile BFF" "Backend-for-frontend for mobile." "Service"
+            bff_web = container "Web BFF" "Backend-for-frontend for web." "Service"
+            partner_api = container "Partner API" "Open banking APIs for partners." "Service"
+
+            /***** Core Domain Services *****/
+            identity_svc = container "Identity Service" "Authentication, authorisation, SCA." "Microservice"
+            customer_svc = container "Customer Service" "Customer profiles, KYC status." "Microservice"
+            account_svc = container "Account Service" "Account lifecycle and metadata." "Microservice"
+            ledger_svc = container "Ledger Service" "Financial postings and balances." "Microservice"
+            payments_svc = container "Payments Service" "SEPA/ACH/wire payments orchestration." "Microservice"
+            cards_svc = container "Cards Service" "Card lifecycle and authorizations." "Microservice"
+            fraud_svc = container "Fraud Service" "Real-time fraud detection." "Microservice"
+            event_bus = container "Event Bus" "Kafka/ streaming platform for domain events." "Messaging"
+
+            /***** Platform *****/
+            discovery_svc = container "Service Discovery" "Service mesh and registry." "Platform"
+        }
+
+        /*********************
+         * External Systems
+         *********************/
+        external = softwareSystem "External Systems" {
+            ext_sepa = container "SEPA Clearing" "Domestic payment clearing." "External"
+            ext_swift = container "SWIFT Network" "Cross-border payments." "External"
+            ext_cards = container "Card Schemes" "Visa/Mastercard processors." "External"
+        }
+
+        /*********************
+         * Relationships (MUST be inside model)
+         *********************/
+
+        /***** People to systems *****/
+        customer -> channels "Uses mobile/web/ATM channels"
+        partner -> bank "Integrates via partner APIs"
+
+        /***** Channels to bank API gateway *****/
+        mobile_app -> api_gateway "REST/GraphQL over TLS"
+        web_app -> api_gateway "REST/GraphQL over TLS"
+        atm_channel -> api_gateway "ATM/POS traffic"
+
+        api_gateway -> bff_mobile "Routes mobile requests"
+        api_gateway -> bff_web "Routes web requests"
+        api_gateway -> partner_api "Routes partner/open banking traffic"
+
+        /***** BFFs to core services (shortened) *****/
+        bff_mobile -> identity_svc "Authenticate user"
+        bff_mobile -> customer_svc "Customer profile"
+        bff_mobile -> account_svc "Accounts and balances"
+        bff_mobile -> payments_svc "Initiate payments"
+
+        bff_web -> identity_svc "Authenticate user"
+        bff_web -> account_svc "Accounts, statements"
+        partner_api -> payments_svc "Payment initiation APIs"
+
+        /***** Core domain flows (examples) *****/
+        identity_svc -> event_bus "UserAuthenticated events"
+        account_svc -> ledger_svc "Request postings"
+        payments_svc -> ledger_svc "Debit/credit accounts"
+        payments_svc -> ext_sepa "Send SEPA payments"
+        payments_svc -> ext_swift "Send cross-border payments"
+        cards_svc -> ext_cards "Card authorizations"
+
+        /***** Platform integration *****/
+        payments_svc -> discovery_svc "Service discovery"
+        cards_svc -> discovery_svc "Service discovery"
+    }
+
+    views {
+
+        systemContext bank "SystemContext" {
+            include *
+            autoLayout lr
+            title "Microservices Bank - System Context"
+        }
+
+        container bank "CoreContainers" {
+            include *
+            autoLayout lr
+            title "Core Microservices"
+        }
+
+        container channels "ChannelContainers" {
+            include *
+            autoLayout tb
+            title "Customer Channels"
+        }
+
+        container external "ExternalSystems" {
+            include *
+            autoLayout lr
+            title "External Payment Systems"
+        }
+
+        styles {
+            element "Person" {
+                shape Person
+                background #08427b
+                color #ffffff
+            }
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Microservice" {
+                background #00b5ff
+                color #ffffff
+            }
+            element "Messaging" {
+                background #ffa500
+                color #000000
+            }
+            element "External" {
+                background #e6362a
+                color #ffffff
+            }
+        }
+    }
+}

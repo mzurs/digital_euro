@@ -1,0 +1,143 @@
+workspace "Monolithic Bank Architecture" "Typical legacy monolithic architecture of a European retail bank" {
+
+    model {
+
+        /*********************
+         * People
+         *********************/
+        customer = person "Retail Customer" "Uses bank services for daily banking, cards and payments."
+        corp_customer = person "Corporate Customer" "Uses bank services for payments, trade finance and treasury."
+        supervisors = person "Supervisors & Regulators" "Receive regulatory and supervisory reports from the bank."
+
+        /*********************
+         * Core System
+         *********************/
+        bank = softwareSystem "Retail Bank Information System" "Legacy monolithic architecture with a core banking system surrounded by channels, ESB and external payment integrations." {
+
+            /***** Channels *****/
+            online_banking = container "Online Banking Web App" "Allows customers to view accounts, initiate SEPA payments, manage cards, etc." "Web Application"
+            mobile_banking = container "Mobile Banking App" "Mobile app for balances, transfers, card controls, etc." "Mobile Application"
+            branch_system = container "Branch/Teller Application" "Used by tellers in branches to serve customers." "Desktop Application"
+            contact_center = container "Contact Center CRM" "Used by call center agents to support customers." "Desktop/Web Application"
+            atm_network = container "ATM Network" "ATMs for cash withdrawal, balance inquiry, PIN services." "Infrastructure"
+
+            /***** Access & Security *****/
+            iam = container "Identity & Access Management (IAM)" "Provides authentication, SCA and authorisation tokens for digital channels." "Application Service"
+
+            /***** Integration Layer *****/
+            esb = container "Enterprise Service Bus (ESB)" "Performs routing, transformation and orchestration between channels, core and external systems." "Integration Platform"
+
+            /***** Monolithic Core *****/
+            core_banking = container "Core Banking System" "Mainframe or large packaged solution holding accounts, products, GL, and business logic." "Monolithic Application"
+
+            /***** Internal Supporting Systems *****/
+            cms = container "Card Management System" "Manages card issuance, lifecycle, limits, and card accounts; tightly coupled to core." "Application"
+            aml_fraud = container "AML & Fraud Monitoring" "Monitors transactions for AML and fraud; can block or flag payments." "Application"
+            data_warehouse = container "Data Warehouse & Reporting" "Stores historical data for regulatory, risk and management reporting." "Database / BI"
+            treasury = container "Treasury & Liquidity Management" "Manages liquidity, FX, and positions; interfaces to RTGS and money markets." "Application"
+
+            /***** External Interfaces / Gateways *****/
+            sepa_gateway = container "SEPA / ACH Gateway" "Interfaces with SEPA clearing systems for SCT/SDD and SEPA Instant (where available)." "Application"
+            card_switch = container "Card Switch" "Routes ATM/POS card transactions to internal authorisation and external card schemes." "Application"
+            swift_gateway = container "SWIFT Gateway" "Handles SWIFT MT/MX messages for cross-border payments and trade finance." "Application"
+            rtgs_interface = container "RTGS Interface (e.g. TARGET/T2)" "Connectivity to central bank RTGS for high-value payments and settlement." "Application"
+
+            /***** External Systems *****/
+            ext_sepa_csm = container "External SEPA CSM" "Clearing & Settlement Mechanism for SEPA payments." "External System"
+            ext_card_schemes = container "Card Schemes / Processors" "Visa/Mastercard and/or domestic schemes and processors." "External System"
+            ext_swift_network = container "SWIFT Network" "Global SWIFT network for cross-border payments and messaging." "External System"
+            ext_rtgs = container "Central Bank RTGS (e.g. TARGET/T2)" "Central bank real-time gross settlement system." "External System"
+        }
+
+        /*********************
+         * Relationships
+         *********************/
+
+        /***** People to Channels *****/
+        customer -> online_banking "Views accounts, initiates payments, manages cards over HTTPS."
+        customer -> mobile_banking "Uses mobile app for balances, SEPA payments, card controls."
+        customer -> atm_network "Withdraws cash, checks balances, changes PIN."
+        customer -> branch_system "Visits branch; served by teller via branch system."
+        customer -> contact_center "Calls contact center; agent uses CRM to support."
+        corp_customer -> online_banking "Initiates bulk/urgent payments, views statements."
+        corp_customer -> branch_system "Uses branch for complex services."
+
+        /***** Channels to IAM *****/
+        online_banking -> iam "Authenticates users, obtains tokens (SCA)."
+        mobile_banking -> iam "Authenticates users, obtains tokens (SCA)."
+        contact_center -> iam "Verifies customer identity for agent-assisted operations."
+
+        /***** Channels to ESB *****/
+        online_banking -> esb "Invokes services (balance inquiry, payment initiation) via REST/SOAP."
+        mobile_banking -> esb "Invokes services (balance inquiry, payment initiation) via REST/SOAP."
+        branch_system -> esb "Uses internal protocols/APIs for account servicing."
+        contact_center -> esb "Invokes customer and account services via ESB."
+        atm_network -> card_switch "Sends ISO 8583 ATM transaction messages."
+
+        /***** ESB to Core and Internal Systems *****/
+        esb -> core_banking "Routes and orchestrates business operations (balance checks, postings)."
+        esb -> aml_fraud "Sends payment events for AML/fraud checks; receives approve/block decisions."
+        esb -> cms "Sends card-related requests (authorisation, card status) where not handled directly by core."
+        esb -> data_warehouse "Provides near-real-time feeds or batch extracts for reporting (optional)."
+
+        /***** Core to Internal Systems *****/
+        core_banking -> cms "Synchronises card accounts, balances, and lifecycle events."
+        core_banking -> data_warehouse "Sends end-of-day extracts for reporting, risk and analytics (ETL/batch)."
+        core_banking -> treasury "Provides positions, balances and cash flows for liquidity management."
+        aml_fraud -> core_banking "Blocks or flags transactions; may place holds on accounts."
+
+        /***** Payments out of Core via ESB *****/
+        core_banking -> esb "Produces payment instructions (SEPA, SWIFT, high-value) for external gateways."
+
+        /***** SEPA / ACH Flows *****/
+        esb -> sepa_gateway "Sends SEPA payment files/messages (pain/pacs)."
+        sepa_gateway -> ext_sepa_csm "Exchanges SCT/SDD/instant messages for clearing and settlement."
+
+        /***** Card Flows *****/
+        card_switch -> ext_card_schemes "Routes card authorisation and clearing messages to schemes."
+        ext_card_schemes -> card_switch "Returns authorisation responses and settlement files."
+        card_switch -> core_banking "Requests online authorisation; posts financial transactions."
+
+        /***** SWIFT Flows *****/
+        esb -> swift_gateway "Sends payment and trade messages (MT/MX)."
+        swift_gateway -> ext_swift_network "Exchanges SWIFT messages with counterparties."
+
+        /***** RTGS Flows *****/
+        treasury -> rtgs_interface "Sends high-value and liquidity transfers."
+        rtgs_interface -> ext_rtgs "Exchanges RTGS messages with central bank system."
+
+        /***** Data Warehouse and Reporting *****/
+        data_warehouse -> supervisors "Provides regulatory reports (FINREP/COREP, AML, etc.)."
+    }
+
+    views {
+
+        systemContext bank "SystemContext" {
+            include *
+            autoLayout lr
+            title "System Context: Retail Bank (Monolithic Architecture)"
+        }
+
+        container bank "ContainerView" {
+            include *
+            autoLayout lr
+            title "Container View: Monolithic Core Architecture with ESB and External Payment Integrations"
+        }
+
+        styles {
+            element "Person" {
+                shape Person
+                background #08427b
+                color #ffffff
+            }
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+        }
+    }
+}

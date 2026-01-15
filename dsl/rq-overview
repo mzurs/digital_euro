@@ -1,0 +1,84 @@
+workspace "Digital Euro Integration" "Technical architecture for Bank Back-End integration with DESP" {
+
+    model {
+        # Actors
+        user = person "Digital Euro User" "A bank customer using the mobile wallet."
+        eurosystem = softwareSystem "Digital Euro Service Platform (DESP)" "The central settlement engine managed by the Eurosystem." {
+            accessGateway = container "Digital Euro Access Gateway" "Entry point for PSPs" "gRPC/mTLS"
+            settlementEngine = container "Settlement Engine" "Manages central ledger and unspent transaction outputs"
+            dca = container "Dedicated Cash Account (DCA)" "Bank's liquidity buffer at Central Bank"
+        }
+
+        # The Bank System
+        bank = softwareSystem "Commercial Bank" "The PSP integrating with the Digital Euro." {
+            
+            mobileApp = container "Mobile Banking App" "Frontend for users" "Flutter/React Native"
+
+            group "Legacy Infrastructure" {
+                cbs = container "Core Banking System" "System of Record for Commercial Money" "Mainframe/Cobol"
+                treasury = container "Treasury System" "Manages liquidity and Target2 connections"
+            }
+
+            group "Digital Euro Integration Layer" {
+                apiGateway = container "API Gateway" "Routes traffic and handles auth" "Nginx/Kong"
+                
+                # The Core Microservice
+                deGateway = container "Digital Euro Gateway Service" "Microservice handling DESP logic" "Java/Spring Boot" {
+                    component "Liquidity Manager" "Automates Reverse Waterfall logic"
+                    // component "Privacy Proxy" "Tokenizes User IDs into DEANs"
+                    // component "Offline Sync" "Verifies cryptographic proofs from offline wallets"
+                    component "gRPC Client" "High-performance stub for DESP communication"
+                }
+            }
+        }
+
+        # Relationships
+        user -> mobileApp "Initiates Top-up/Payment"
+        mobileApp -> apiGateway "HTTPS/JSON"
+        apiGateway -> deGateway "Routes request"
+        
+        # Internal Logic
+        deGateway -> cbs "Locks funds (Reverse Waterfall)" "Internal Event Bus"
+        deGateway -> treasury "Requests DCA liquidity top-up" "MQ Series"
+        
+        # External Integration (The critical link)
+        deGateway -> accessGateway "Instructs Settlement" "gRPC/Protobuf (mTLS)"
+        accessGateway -> settlementEngine "Updates Ledger"
+    }
+
+    views {
+        systemContext bank "SystemContext" {
+            include *
+            autoLayout
+        }
+
+        container bank "ContainerView" {
+            include *
+            autoLayout
+        }
+
+        component deGateway "ComponentView" {
+            include *
+            autoLayout
+        }
+
+        styles {
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Person" {
+                shape Person
+                background #08427b
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Digital Euro Integration Layer" {
+                background #44aa44
+            }
+        }
+    }
+}

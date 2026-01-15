@@ -1,0 +1,91 @@
+workspace "Digital Euro Integration with Affected Bank Components" "Enhanced Architecture for DESP and PSP (Bank) Integration" {
+!identifiers hierarchical
+model {
+properties {
+"structurizr.groupSeparator" "/"
+}
+endUser = person "End User" "Payer or Payee"
+pspBank = softwareSystem "PSP Bank" "Payment Service Provider (e.g., Bank)" {
+group "Commercial Layer" {
+group "Customer Relationship" {
+customerContracts = container "Customer Contracts" "Digital euro contract changes" "" "Affected"
+legal = container "Legal" "Regulatory compliance" "" "Affected"
+marketingSales = container "Marketing & Sales" "Adoption strategy" "" "Affected"
+marketLaunch = container "Market Launch" "Rollout planning" "" "Affected"
+}
+}
+group "Technical Layer" {
+group "Individual User Domain" {
+paymentChannelsIndividual = container "Payment Channels (Individual)" "Mobile/Web apps" "" "Affected"
+}
+group "Business User Domain" {
+paymentChannelsBusiness = container "Payment Channels (Business)" "Business interfaces" "" "Affected"
+}
+group "Other Domains" {
+branchATM = container "Branch & ATM Network" "Funding/defunding support" "" "Affected"
+posEcommerce = container "POS & E-Commerce" "Acceptance infrastructure" "" "Affected"
+}
+group "Intermediary Domain" {
+accounts = container "Accounts" "Digital euro accounts & DEANs" "" "Affected"
+liquidity = container "Liquidity" "DCA & waterfall automation" "" "Affected"
+riskCompliance = container "Risk & Compliance" "Fraud, KYC, AML" "" "Affected"
+interfaces = container "Interfaces" "DESP connectivity" "" "Affected"
+}
+}
+group "Operational Layer" {
+group "Invoicing and Reporting" {
+feeCalculation = container "Fee Calculation" "Billing logic" "" "Affected"
+dataManagement = container "Data Management" "Pseudonymised data" "" "Affected"
+reportingStatistics = container "Reporting & Statistics" "Analytics" "" "Affected"
+processes = container "Processes" "Back-office workflows" "" "Affected"
+}
+}
+frontendApp = container "Front-End App" "Mobile/Web UI" "App"
+backendSystem = container "Back-End System" "Core banking logic" "Backend"
+apiGateway = container "API Gateway" "DESP integration" "API"
+database = container "Database" "User data, DEANs" "Database"
+complianceModule = container "Compliance Module" "KYC/AML checks" "Module"
+}
+desp = softwareSystem "DESP" "Digital Euro Service Platform" "Central Platform" {
+accessMgmt = container "Access Management" "Onboarding & aliases" "Service"
+liquidityMgmt = container "Liquidity Management" "Funding & DCA" "Service"
+transactionMgmt = container "Transaction Management" "Conditional & offline payments" "Service"
+settlementService = container "Settlement Service" "Executes settlement" "Service"
+aliasLookup = container "Alias Lookup" "DEAN resolution" "Service"
+}
+eurosystem = softwareSystem "Eurosystem" "ECB & NCBs oversight"
+// ===== RELATIONSHIPS =====
+endUser -> pspBank.frontendApp "Initiates payments"
+pspBank.frontendApp -> pspBank.backendSystem "Forwards requests"
+pspBank.backendSystem -> pspBank.apiGateway "Routes to DESP"
+pspBank.apiGateway -> desp.accessMgmt "Access & onboarding" "HTTPS"
+pspBank.apiGateway -> desp.liquidityMgmt "Liquidity operations" "HTTPS"
+pspBank.apiGateway -> desp.transactionMgmt "Transaction processing" "HTTPS"
+desp.transactionMgmt -> desp.liquidityMgmt "Checks liquidity"
+desp.liquidityMgmt -> desp.settlementService "Reserves funds"
+desp.transactionMgmt -> desp.settlementService "Settles payment"
+desp.accessMgmt -> desp.aliasLookup "Alias resolution"
+desp -> pspBank.backendSystem "Notifications"
+desp -> eurosystem "Oversight"
+}
+views {
+systemContext desp "SystemContext" {
+include *
+autolayout lr
+}
+container pspBank "Affected_Containers_PSP" {
+include *
+autolayout tb
+}
+container desp "Containers_DESP" {
+include *
+autolayout lr
+}
+styles {
+element "Affected" {
+stroke #ff0000
+color #ff0000
+}
+}
+}
+}

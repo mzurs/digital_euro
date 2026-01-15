@@ -1,0 +1,11 @@
+1. Change outline on Pedro comments accordingly.
+-How many VAS should I talk about in my report?
+- Can I add AI intergrqation as  a VAS? (DB whitepaper)
+- Can I add crypto as a VAS?
+3. What happens if they change Technical Details? reference research paper table
+2. Evaluation of Architectural Patterns
+	Microservices vs. Monolithic Integration- how much detail should I talk about
+	For large Diagrams should I include here or host on cloud and add reference here?
+4. New Diagrams
+5. 
+

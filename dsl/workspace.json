@@ -1,0 +1,689 @@
+{
+  "configuration" : { },
+  "description" : "Enhanced Architecture for DESP and PSP (Bank) Integration",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-12-22T07:46:11Z",
+  "model" : {
+    "people" : [ {
+      "description" : "Payer or Payee",
+      "id" : "1",
+      "name" : "End User",
+      "properties" : {
+        "structurizr.dsl.identifier" : "endUser"
+      },
+      "relationships" : [ {
+        "description" : "Initiates payments",
+        "destinationId" : "19",
+        "id" : "31",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Initiates payments",
+        "destinationId" : "2",
+        "id" : "32",
+        "linkedRelationshipId" : "31",
+        "sourceId" : "1"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "properties" : {
+      "structurizr.groupSeparator" : "/"
+    },
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "description" : "Digital euro contract changes",
+        "documentation" : { },
+        "group" : "Commercial Layer/Customer Relationship",
+        "id" : "3",
+        "name" : "Customer Contracts",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.customerContracts"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Regulatory compliance",
+        "documentation" : { },
+        "group" : "Commercial Layer/Customer Relationship",
+        "id" : "4",
+        "name" : "Legal",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.legal"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Adoption strategy",
+        "documentation" : { },
+        "group" : "Commercial Layer/Customer Relationship",
+        "id" : "5",
+        "name" : "Marketing & Sales",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.marketingSales"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Rollout planning",
+        "documentation" : { },
+        "group" : "Commercial Layer/Customer Relationship",
+        "id" : "6",
+        "name" : "Market Launch",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.marketLaunch"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Mobile/Web apps",
+        "documentation" : { },
+        "group" : "Technical Layer/Individual User Domain",
+        "id" : "7",
+        "name" : "Payment Channels (Individual)",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.paymentChannelsIndividual"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Business interfaces",
+        "documentation" : { },
+        "group" : "Technical Layer/Business User Domain",
+        "id" : "8",
+        "name" : "Payment Channels (Business)",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.paymentChannelsBusiness"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Funding/defunding support",
+        "documentation" : { },
+        "group" : "Technical Layer/Other Domains",
+        "id" : "9",
+        "name" : "Branch & ATM Network",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.branchATM"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Acceptance infrastructure",
+        "documentation" : { },
+        "group" : "Technical Layer/Other Domains",
+        "id" : "10",
+        "name" : "POS & E-Commerce",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.posEcommerce"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Digital euro accounts & DEANs",
+        "documentation" : { },
+        "group" : "Technical Layer/Intermediary Domain",
+        "id" : "11",
+        "name" : "Accounts",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.accounts"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "DCA & waterfall automation",
+        "documentation" : { },
+        "group" : "Technical Layer/Intermediary Domain",
+        "id" : "12",
+        "name" : "Liquidity",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.liquidity"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Fraud, KYC, AML",
+        "documentation" : { },
+        "group" : "Technical Layer/Intermediary Domain",
+        "id" : "13",
+        "name" : "Risk & Compliance",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.riskCompliance"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "DESP connectivity",
+        "documentation" : { },
+        "group" : "Technical Layer/Intermediary Domain",
+        "id" : "14",
+        "name" : "Interfaces",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.interfaces"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Billing logic",
+        "documentation" : { },
+        "group" : "Operational Layer/Invoicing and Reporting",
+        "id" : "15",
+        "name" : "Fee Calculation",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.feeCalculation"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Pseudonymised data",
+        "documentation" : { },
+        "group" : "Operational Layer/Invoicing and Reporting",
+        "id" : "16",
+        "name" : "Data Management",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.dataManagement"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Analytics",
+        "documentation" : { },
+        "group" : "Operational Layer/Invoicing and Reporting",
+        "id" : "17",
+        "name" : "Reporting & Statistics",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.reportingStatistics"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Back-office workflows",
+        "documentation" : { },
+        "group" : "Operational Layer/Invoicing and Reporting",
+        "id" : "18",
+        "name" : "Processes",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.processes"
+        },
+        "tags" : "Element,Container,Affected"
+      }, {
+        "description" : "Mobile/Web UI",
+        "documentation" : { },
+        "id" : "19",
+        "name" : "Front-End App",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.frontendApp"
+        },
+        "relationships" : [ {
+          "description" : "Forwards requests",
+          "destinationId" : "20",
+          "id" : "33",
+          "sourceId" : "19",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "App"
+      }, {
+        "description" : "Core banking logic",
+        "documentation" : { },
+        "id" : "20",
+        "name" : "Back-End System",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.backendSystem"
+        },
+        "relationships" : [ {
+          "description" : "Routes to DESP",
+          "destinationId" : "21",
+          "id" : "34",
+          "sourceId" : "20",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Backend"
+      }, {
+        "description" : "DESP integration",
+        "documentation" : { },
+        "id" : "21",
+        "name" : "API Gateway",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.apiGateway"
+        },
+        "relationships" : [ {
+          "description" : "Access & onboarding",
+          "destinationId" : "25",
+          "id" : "35",
+          "sourceId" : "21",
+          "tags" : "Relationship",
+          "technology" : "HTTPS"
+        }, {
+          "description" : "Access & onboarding",
+          "destinationId" : "24",
+          "id" : "36",
+          "linkedRelationshipId" : "35",
+          "sourceId" : "21",
+          "technology" : "HTTPS"
+        }, {
+          "description" : "Liquidity operations",
+          "destinationId" : "26",
+          "id" : "39",
+          "sourceId" : "21",
+          "tags" : "Relationship",
+          "technology" : "HTTPS"
+        }, {
+          "description" : "Transaction processing",
+          "destinationId" : "27",
+          "id" : "41",
+          "sourceId" : "21",
+          "tags" : "Relationship",
+          "technology" : "HTTPS"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "API"
+      }, {
+        "description" : "User data, DEANs",
+        "documentation" : { },
+        "id" : "22",
+        "name" : "Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.database"
+        },
+        "tags" : "Element,Container",
+        "technology" : "Database"
+      }, {
+        "description" : "KYC/AML checks",
+        "documentation" : { },
+        "id" : "23",
+        "name" : "Compliance Module",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pspBank.complianceModule"
+        },
+        "tags" : "Element,Container",
+        "technology" : "Module"
+      } ],
+      "description" : "Payment Service Provider (e.g., Bank)",
+      "documentation" : { },
+      "id" : "2",
+      "name" : "PSP Bank",
+      "properties" : {
+        "structurizr.dsl.identifier" : "pspBank"
+      },
+      "relationships" : [ {
+        "description" : "Access & onboarding",
+        "destinationId" : "25",
+        "id" : "37",
+        "linkedRelationshipId" : "35",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Access & onboarding",
+        "destinationId" : "24",
+        "id" : "38",
+        "linkedRelationshipId" : "35",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Liquidity operations",
+        "destinationId" : "26",
+        "id" : "40",
+        "linkedRelationshipId" : "39",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Transaction processing",
+        "destinationId" : "27",
+        "id" : "42",
+        "linkedRelationshipId" : "41",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "containers" : [ {
+        "description" : "Onboarding & aliases",
+        "documentation" : { },
+        "id" : "25",
+        "name" : "Access Management",
+        "properties" : {
+          "structurizr.dsl.identifier" : "desp.accessMgmt"
+        },
+        "relationships" : [ {
+          "description" : "Alias resolution",
+          "destinationId" : "29",
+          "id" : "46",
+          "sourceId" : "25",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Service"
+      }, {
+        "description" : "Funding & DCA",
+        "documentation" : { },
+        "id" : "26",
+        "name" : "Liquidity Management",
+        "properties" : {
+          "structurizr.dsl.identifier" : "desp.liquidityMgmt"
+        },
+        "relationships" : [ {
+          "description" : "Reserves funds",
+          "destinationId" : "28",
+          "id" : "44",
+          "sourceId" : "26",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Service"
+      }, {
+        "description" : "Conditional & offline payments",
+        "documentation" : { },
+        "id" : "27",
+        "name" : "Transaction Management",
+        "properties" : {
+          "structurizr.dsl.identifier" : "desp.transactionMgmt"
+        },
+        "relationships" : [ {
+          "description" : "Checks liquidity",
+          "destinationId" : "26",
+          "id" : "43",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Settles payment",
+          "destinationId" : "28",
+          "id" : "45",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Service"
+      }, {
+        "description" : "Executes settlement",
+        "documentation" : { },
+        "id" : "28",
+        "name" : "Settlement Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "desp.settlementService"
+        },
+        "tags" : "Element,Container",
+        "technology" : "Service"
+      }, {
+        "description" : "DEAN resolution",
+        "documentation" : { },
+        "id" : "29",
+        "name" : "Alias Lookup",
+        "properties" : {
+          "structurizr.dsl.identifier" : "desp.aliasLookup"
+        },
+        "tags" : "Element,Container",
+        "technology" : "Service"
+      } ],
+      "description" : "Digital Euro Service Platform",
+      "documentation" : { },
+      "id" : "24",
+      "name" : "DESP",
+      "properties" : {
+        "structurizr.dsl.identifier" : "desp"
+      },
+      "relationships" : [ {
+        "description" : "Notifications",
+        "destinationId" : "20",
+        "id" : "47",
+        "sourceId" : "24",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Notifications",
+        "destinationId" : "2",
+        "id" : "48",
+        "linkedRelationshipId" : "47",
+        "sourceId" : "24"
+      }, {
+        "description" : "Oversight",
+        "destinationId" : "30",
+        "id" : "49",
+        "sourceId" : "24",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System,Central Platform"
+    }, {
+      "description" : "ECB & NCBs oversight",
+      "documentation" : { },
+      "id" : "30",
+      "name" : "Eurosystem",
+      "properties" : {
+        "structurizr.dsl.identifier" : "eurosystem"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Digital Euro Integration with Affected Bank Components",
+  "properties" : {
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.error" : "52",
+    "structurizr.inspection.warning" : "0",
+    "structurizr.dsl" : "d29ya3NwYWNlICJEaWdpdGFsIEV1cm8gSW50ZWdyYXRpb24gd2l0aCBBZmZlY3RlZCBCYW5rIENvbXBvbmVudHMiICJFbmhhbmNlZCBBcmNoaXRlY3R1cmUgZm9yIERFU1AgYW5kIFBTUCAoQmFuaykgSW50ZWdyYXRpb24iIHsKIWlkZW50aWZpZXJzIGhpZXJhcmNoaWNhbAptb2RlbCB7CnByb3BlcnRpZXMgewoic3RydWN0dXJpenIuZ3JvdXBTZXBhcmF0b3IiICIvIgp9CmVuZFVzZXIgPSBwZXJzb24gIkVuZCBVc2VyIiAiUGF5ZXIgb3IgUGF5ZWUiCnBzcEJhbmsgPSBzb2Z0d2FyZVN5c3RlbSAiUFNQIEJhbmsiICJQYXltZW50IFNlcnZpY2UgUHJvdmlkZXIgKGUuZy4sIEJhbmspIiB7Cmdyb3VwICJDb21tZXJjaWFsIExheWVyIiB7Cmdyb3VwICJDdXN0b21lciBSZWxhdGlvbnNoaXAiIHsKY3VzdG9tZXJDb250cmFjdHMgPSBjb250YWluZXIgIkN1c3RvbWVyIENvbnRyYWN0cyIgIkRpZ2l0YWwgZXVybyBjb250cmFjdCBjaGFuZ2VzIiAiIiAiQWZmZWN0ZWQiCmxlZ2FsID0gY29udGFpbmVyICJMZWdhbCIgIlJlZ3VsYXRvcnkgY29tcGxpYW5jZSIgIiIgIkFmZmVjdGVkIgptYXJrZXRpbmdTYWxlcyA9IGNvbnRhaW5lciAiTWFya2V0aW5nICYgU2FsZXMiICJBZG9wdGlvbiBzdHJhdGVneSIgIiIgIkFmZmVjdGVkIgptYXJrZXRMYXVuY2ggPSBjb250YWluZXIgIk1hcmtldCBMYXVuY2giICJSb2xsb3V0IHBsYW5uaW5nIiAiIiAiQWZmZWN0ZWQiCn0KfQpncm91cCAiVGVjaG5pY2FsIExheWVyIiB7Cmdyb3VwICJJbmRpdmlkdWFsIFVzZXIgRG9tYWluIiB7CnBheW1lbnRDaGFubmVsc0luZGl2aWR1YWwgPSBjb250YWluZXIgIlBheW1lbnQgQ2hhbm5lbHMgKEluZGl2aWR1YWwpIiAiTW9iaWxlL1dlYiBhcHBzIiAiIiAiQWZmZWN0ZWQiCn0KZ3JvdXAgIkJ1c2luZXNzIFVzZXIgRG9tYWluIiB7CnBheW1lbnRDaGFubmVsc0J1c2luZXNzID0gY29udGFpbmVyICJQYXltZW50IENoYW5uZWxzIChCdXNpbmVzcykiICJCdXNpbmVzcyBpbnRlcmZhY2VzIiAiIiAiQWZmZWN0ZWQiCn0KZ3JvdXAgIk90aGVyIERvbWFpbnMiIHsKYnJhbmNoQVRNID0gY29udGFpbmVyICJCcmFuY2ggJiBBVE0gTmV0d29yayIgIkZ1bmRpbmcvZGVmdW5kaW5nIHN1cHBvcnQiICIiICJBZmZlY3RlZCIKcG9zRWNvbW1lcmNlID0gY29udGFpbmVyICJQT1MgJiBFLUNvbW1lcmNlIiAiQWNjZXB0YW5jZSBpbmZyYXN0cnVjdHVyZSIgIiIgIkFmZmVjdGVkIgp9Cmdyb3VwICJJbnRlcm1lZGlhcnkgRG9tYWluIiB7CmFjY291bnRzID0gY29udGFpbmVyICJBY2NvdW50cyIgIkRpZ2l0YWwgZXVybyBhY2NvdW50cyAmIERFQU5zIiAiIiAiQWZmZWN0ZWQiCmxpcXVpZGl0eSA9IGNvbnRhaW5lciAiTGlxdWlkaXR5IiAiRENBICYgd2F0ZXJmYWxsIGF1dG9tYXRpb24iICIiICJBZmZlY3RlZCIKcmlza0NvbXBsaWFuY2UgPSBjb250YWluZXIgIlJpc2sgJiBDb21wbGlhbmNlIiAiRnJhdWQsIEtZQywgQU1MIiAiIiAiQWZmZWN0ZWQiCmludGVyZmFjZXMgPSBjb250YWluZXIgIkludGVyZmFjZXMiICJERVNQIGNvbm5lY3Rpdml0eSIgIiIgIkFmZmVjdGVkIgp9Cn0KZ3JvdXAgIk9wZXJhdGlvbmFsIExheWVyIiB7Cmdyb3VwICJJbnZvaWNpbmcgYW5kIFJlcG9ydGluZyIgewpmZWVDYWxjdWxhdGlvbiA9IGNvbnRhaW5lciAiRmVlIENhbGN1bGF0aW9uIiAiQmlsbGluZyBsb2dpYyIgIiIgIkFmZmVjdGVkIgpkYXRhTWFuYWdlbWVudCA9IGNvbnRhaW5lciAiRGF0YSBNYW5hZ2VtZW50IiAiUHNldWRvbnltaXNlZCBkYXRhIiAiIiAiQWZmZWN0ZWQiCnJlcG9ydGluZ1N0YXRpc3RpY3MgPSBjb250YWluZXIgIlJlcG9ydGluZyAmIFN0YXRpc3RpY3MiICJBbmFseXRpY3MiICIiICJBZmZlY3RlZCIKcHJvY2Vzc2VzID0gY29udGFpbmVyICJQcm9jZXNzZXMiICJCYWNrLW9mZmljZSB3b3JrZmxvd3MiICIiICJBZmZlY3RlZCIKfQp9CmZyb250ZW5kQXBwID0gY29udGFpbmVyICJGcm9udC1FbmQgQXBwIiAiTW9iaWxlL1dlYiBVSSIgIkFwcCIKYmFja2VuZFN5c3RlbSA9IGNvbnRhaW5lciAiQmFjay1FbmQgU3lzdGVtIiAiQ29yZSBiYW5raW5nIGxvZ2ljIiAiQmFja2VuZCIKYXBpR2F0ZXdheSA9IGNvbnRhaW5lciAiQVBJIEdhdGV3YXkiICJERVNQIGludGVncmF0aW9uIiAiQVBJIgpkYXRhYmFzZSA9IGNvbnRhaW5lciAiRGF0YWJhc2UiICJVc2VyIGRhdGEsIERFQU5zIiAiRGF0YWJhc2UiCmNvbXBsaWFuY2VNb2R1bGUgPSBjb250YWluZXIgIkNvbXBsaWFuY2UgTW9kdWxlIiAiS1lDL0FNTCBjaGVja3MiICJNb2R1bGUiCn0KZGVzcCA9IHNvZnR3YXJlU3lzdGVtICJERVNQIiAiRGlnaXRhbCBFdXJvIFNlcnZpY2UgUGxhdGZvcm0iICJDZW50cmFsIFBsYXRmb3JtIiB7CmFjY2Vzc01nbXQgPSBjb250YWluZXIgIkFjY2VzcyBNYW5hZ2VtZW50IiAiT25ib2FyZGluZyAmIGFsaWFzZXMiICJTZXJ2aWNlIgpsaXF1aWRpdHlNZ210ID0gY29udGFpbmVyICJMaXF1aWRpdHkgTWFuYWdlbWVudCIgIkZ1bmRpbmcgJiBEQ0EiICJTZXJ2aWNlIgp0cmFuc2FjdGlvbk1nbXQgPSBjb250YWluZXIgIlRyYW5zYWN0aW9uIE1hbmFnZW1lbnQiICJDb25kaXRpb25hbCAmIG9mZmxpbmUgcGF5bWVudHMiICJTZXJ2aWNlIgpzZXR0bGVtZW50U2VydmljZSA9IGNvbnRhaW5lciAiU2V0dGxlbWVudCBTZXJ2aWNlIiAiRXhlY3V0ZXMgc2V0dGxlbWVudCIgIlNlcnZpY2UiCmFsaWFzTG9va3VwID0gY29udGFpbmVyICJBbGlhcyBMb29rdXAiICJERUFOIHJlc29sdXRpb24iICJTZXJ2aWNlIgp9CmV1cm9zeXN0ZW0gPSBzb2Z0d2FyZVN5c3RlbSAiRXVyb3N5c3RlbSIgIkVDQiAmIE5DQnMgb3ZlcnNpZ2h0IgovLyA9PT09PSBSRUxBVElPTlNISVBTID09PT09CmVuZFVzZXIgLT4gcHNwQmFuay5mcm9udGVuZEFwcCAiSW5pdGlhdGVzIHBheW1lbnRzIgpwc3BCYW5rLmZyb250ZW5kQXBwIC0+IHBzcEJhbmsuYmFja2VuZFN5c3RlbSAiRm9yd2FyZHMgcmVxdWVzdHMiCnBzcEJhbmsuYmFja2VuZFN5c3RlbSAtPiBwc3BCYW5rLmFwaUdhdGV3YXkgIlJvdXRlcyB0byBERVNQIgpwc3BCYW5rLmFwaUdhdGV3YXkgLT4gZGVzcC5hY2Nlc3NNZ210ICJBY2Nlc3MgJiBvbmJvYXJkaW5nIiAiSFRUUFMiCnBzcEJhbmsuYXBpR2F0ZXdheSAtPiBkZXNwLmxpcXVpZGl0eU1nbXQgIkxpcXVpZGl0eSBvcGVyYXRpb25zIiAiSFRUUFMiCnBzcEJhbmsuYXBpR2F0ZXdheSAtPiBkZXNwLnRyYW5zYWN0aW9uTWdtdCAiVHJhbnNhY3Rpb24gcHJvY2Vzc2luZyIgIkhUVFBTIgpkZXNwLnRyYW5zYWN0aW9uTWdtdCAtPiBkZXNwLmxpcXVpZGl0eU1nbXQgIkNoZWNrcyBsaXF1aWRpdHkiCmRlc3AubGlxdWlkaXR5TWdtdCAtPiBkZXNwLnNldHRsZW1lbnRTZXJ2aWNlICJSZXNlcnZlcyBmdW5kcyIKZGVzcC50cmFuc2FjdGlvbk1nbXQgLT4gZGVzcC5zZXR0bGVtZW50U2VydmljZSAiU2V0dGxlcyBwYXltZW50IgpkZXNwLmFjY2Vzc01nbXQgLT4gZGVzcC5hbGlhc0xvb2t1cCAiQWxpYXMgcmVzb2x1dGlvbiIKZGVzcCAtPiBwc3BCYW5rLmJhY2tlbmRTeXN0ZW0gIk5vdGlmaWNhdGlvbnMiCmRlc3AgLT4gZXVyb3N5c3RlbSAiT3ZlcnNpZ2h0Igp9CnZpZXdzIHsKc3lzdGVtQ29udGV4dCBkZXNwICJTeXN0ZW1Db250ZXh0IiB7CmluY2x1ZGUgKgphdXRvbGF5b3V0IGxyCn0KY29udGFpbmVyIHBzcEJhbmsgIkFmZmVjdGVkX0NvbnRhaW5lcnNfUFNQIiB7CmluY2x1ZGUgKgphdXRvbGF5b3V0IHRiCn0KY29udGFpbmVyIGRlc3AgIkNvbnRhaW5lcnNfREVTUCIgewppbmNsdWRlICoKYXV0b2xheW91dCBscgp9CnN0eWxlcyB7CmVsZW1lbnQgIkFmZmVjdGVkIiB7CnN0cm9rZSAjZmYwMDAwCmNvbG9yICNmZjAwMDAKfQp9Cn0KfQ=="
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "Affected_Containers_PSP",
+      "metadataSymbols" : "SquareBrackets",
+      "styles" : {
+        "elements" : [ {
+          "color" : "#ff0000",
+          "stroke" : "#ff0000",
+          "tag" : "Affected"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 4000,
+        "width" : 14942
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 14271,
+        "y" : 160
+      }, {
+        "id" : "3",
+        "x" : 259,
+        "y" : 2410
+      }, {
+        "id" : "4",
+        "x" : 1009,
+        "y" : 2410
+      }, {
+        "id" : "5",
+        "x" : 1759,
+        "y" : 2410
+      }, {
+        "id" : "6",
+        "x" : 2509,
+        "y" : 2410
+      }, {
+        "id" : "7",
+        "x" : 4839,
+        "y" : 2410
+      }, {
+        "id" : "8",
+        "x" : 5629,
+        "y" : 2410
+      }, {
+        "id" : "9",
+        "x" : 6419,
+        "y" : 2410
+      }, {
+        "id" : "10",
+        "x" : 7169,
+        "y" : 2410
+      }, {
+        "id" : "11",
+        "x" : 7959,
+        "y" : 2410
+      }, {
+        "id" : "12",
+        "x" : 8709,
+        "y" : 2410
+      }, {
+        "id" : "13",
+        "x" : 9459,
+        "y" : 2410
+      }, {
+        "id" : "14",
+        "x" : 10209,
+        "y" : 2410
+      }, {
+        "id" : "15",
+        "x" : 11039,
+        "y" : 2410
+      }, {
+        "id" : "16",
+        "x" : 11789,
+        "y" : 2410
+      }, {
+        "id" : "17",
+        "x" : 12539,
+        "y" : 2410
+      }, {
+        "id" : "18",
+        "x" : 13289,
+        "y" : 2410
+      }, {
+        "id" : "19",
+        "x" : 14271,
+        "y" : 910
+      }, {
+        "id" : "20",
+        "x" : 14271,
+        "y" : 1510
+      }, {
+        "id" : "21",
+        "x" : 14079,
+        "y" : 2410
+      }, {
+        "id" : "22",
+        "x" : 3299,
+        "y" : 2410
+      }, {
+        "id" : "23",
+        "x" : 4049,
+        "y" : 2410
+      }, {
+        "id" : "24",
+        "x" : 14271,
+        "y" : 3460
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "Affected_Containers_PSP",
+      "name" : "Container View: PSP Bank",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "31"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "47"
+      } ],
+      "softwareSystemId" : "2"
+    }, {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 1729,
+        "width" : 3270
+      },
+      "elements" : [ {
+        "id" : "2",
+        "x" : 200,
+        "y" : 770
+      }, {
+        "id" : "25",
+        "x" : 1100,
+        "y" : 180
+      }, {
+        "id" : "26",
+        "x" : 1850,
+        "y" : 780
+      }, {
+        "id" : "27",
+        "x" : 1100,
+        "y" : 1090
+      }, {
+        "id" : "28",
+        "x" : 2600,
+        "y" : 1090
+      }, {
+        "id" : "29",
+        "x" : 1850,
+        "y" : 180
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "Containers_DESP",
+      "name" : "Container View: DESP",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "37"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "46"
+      } ],
+      "softwareSystemId" : "24"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 700,
+        "width" : 2350
+      },
+      "elements" : [ {
+        "id" : "2",
+        "x" : 200,
+        "y" : 160
+      }, {
+        "id" : "24",
+        "x" : 950,
+        "y" : 160
+      }, {
+        "id" : "30",
+        "x" : 1700,
+        "y" : 160
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "SystemContext",
+      "name" : "System Context View: DESP",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "38"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      } ],
+      "softwareSystemId" : "24"
+    } ]
+  }
+}
