@@ -1,0 +1,537 @@
+\documentclass[fontsize=12pt]{scrartcl}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage[round]{natbib}
+\usepackage{color} 
+\usepackage[defaultlines=2,all]{nowidow}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{csquotes}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+
+\usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}   % keep for pdfLaTeX
+\usepackage{textcomp}         % provides \texteuro
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{ragged2e}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xltabular}        
+\usepackage[table]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage[table]{xcolor}  
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{float}     
+\usepackage{placeins}   
+\documentclass{article}
+\usepackage[edges]{forest}
+% Preamble:
+\usepackage{tikz}
+\usetikzlibrary{positioning, fit, arrows.meta}
+\usepackage{titlesec}
+\tcbset{
+  reqbox/.style={
+    enhanced,
+    breakable,
+    width=\linewidth,
+    colback=white,
+    colframe=black!35,
+    boxrule=0.6pt,
+    arc=2mm,
+    left=2mm,right=2mm,top=1mm,bottom=1mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!12,
+    coltitle=black,
+    before=\par\medskip,
+    after=\par\medskip
+  }
+}
+
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+
+
+% Convenience macro (optional)
+\newcommand{\EUR}{\texteuro}
+
+% ============================
+
+\addbibresource{references.bib}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+% Set margin if needed, otherwise scrartcl default is used. 
+% Standard academic reports often use geometry, but kept minimal here to match your original style.
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{6pt plus 1pt minus 1pt}
+
+\newcommand{\red}{\textcolor{red}}
+
+\titleformat{\section}  % which section command to format
+  {\fontsize{10}{12}} % format for whole line
+  {\S\thesubsection} % how to show number
+  {1em} % space between number and text
+  {\color{black}} % formatting for just the text
+  [] % formatting for after the text
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace{50cm}
+
+    {\huge Implementation for Banks in the Context of the Digital Euro}
+    % \vspace{3cm}
+
+    % \vspace{1cm}
+    %   {\large \today\par}
+\end{titlepage}
+
+% \newpage
+
+\section{Core DESP Services and Functions}
+
+\begin{table}[!htbp]
+
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.15}
+
+    % light colors
+    \definecolor{TableHeader}{RGB}{180,180,180}
+    \definecolor{RowA}{RGB}{222,222,222}
+    \definecolor{RowB}{RGB}{211,211,211}
+    \definecolor{RowC}{RGB}{222,222,222}
+    \definecolor{RowD}{RGB}{211,211,211}
+    \definecolor{RowE}{RGB}{222,222,222}
+    \definecolor{RowF}{RGB}{211,211,211}
+
+    \begin{tabularx}{\textwidth}{
+        >{\raggedright\arraybackslash}p{2.9cm}
+        X
+        >{\raggedright\arraybackslash}p{3.1cm}
+        >{\raggedright\arraybackslash}p{3.7cm}
+        }
+        \toprule
+        \rowcolor{TableHeader}
+        \textbf{Service bundle}                                                                                                                                                                  &
+        \textbf{Key functions (what)}                                                                                                                                                            &
+        \textbf{Responsibility (who)}                                                                                                                                                            &
+        \textbf{Integration touchpoints (how)}                                                                                                                                                                                     \\
+        \midrule
+
+        \rowcolor{RowA}
+        Access \& User Management                                                                                                                                                                &
+        End-user onboarding/offboarding; wallet lifecycle; credential/authentication management; alias registration \& look-up interactions; waterfall account setup as part of access services. &
+        PSP (primary) + DESP shared services (e.g., alias look-up)                                                                                                                               &
+        KYC/AML performed by PSP; exchange of scheme identifiers (e.g., DEAN/aliases, PSP identifiers); integrate PSP channels with DESP access/alias services and scheme onboarding/switching flows.                              \\
+
+        \rowcolor{RowB}
+        Liquidity \& Limits Management                                                                                                                                                           &
+        Funding/defunding initiation; holding-limit checks and automated limit handling; waterfall/reverse-waterfall execution logic; monitoring and reconciliation; reporting.                  &
+        PSP (initiation, customer funds side) + Eurosystem/DESP (digital euro account/ledger side)                                                                                               &
+        Treasury/core-banking integration for customer debits/credits; connectivity to DESP for funding/defunding and limit outcomes; reconciliation between internal ledgers and DESP settlement/ledger outputs.                  \\
+
+        \rowcolor{RowC}
+        Transaction Initiation \& Authorisation                                                                                                                                                  &
+        Payment initiation across P2P/POS/e-commerce; strong customer authentication; transaction validation prior to settlement instruction; user experience flows and channel enablement.      &
+        PSP (primary)                                                                                                                                                                            &
+        Integrate POS/e-com/P2P channels with PSP authorisation stack; connect PSP back-end to DESP interface for settlement instruction; maintain audit trails aligned with scheme requirements.                                  \\
+
+        \rowcolor{RowD}
+        Settlement, Issuance \& General Ledger                                                                                                                                                   &
+        Verification and recording of digital euro transactions; maintenance of the general ledger for digital euro holdings; issuance and redemption of digital euro units.                     &
+        Eurosystem/DESP                                                                                                                                                                          &
+        PSPs submit settlement instructions and query on behalf of users; integrate with DESP access gateway/API; align internal accounting and reporting with settlement confirmations and ledger states.                         \\
+
+        % \rowcolor{RowE}
+        % Advanced Transaction Services (Baseline + Optional Extensions)                                                                                                                                                                     &
+        % Baseline: pre-authorisation / reservation flows and refunds where applicable.
+        % Optional extension: conditional payment logic explored in experimentation/innovation contexts.                                                                                                                                     &
+        % PSP (service logic) + DESP (supporting capabilities where defined)                                                                                                                                                                 &
+        % Support reservation life-cycles end-to-end (authorise $\rightarrow$ reserve $\rightarrow$ capture/release); align with scheme rules; treat conditional-payment as optional. \\
+
+        \rowcolor{RowE}
+        Risk, Fraud, Compliance \& Disputes                                                                                                                                                      &
+        AML/CFT and fraud controls; dispute intake and case handling; reporting and monitoring; consumption of scheme/DESP signals or components where provided; standardised dispute processes. &
+        PSP (primary operations) + Scheme/DESP (standards/processes and possible shared components)                                                                                              &
+        Integrate fraud/risk engines with digital-euro flows; implement dispute workflows consistent with scheme requirements; connect reporting interfaces and case management to any DESP dispute/risk components as applicable. \\
+
+        \rowcolor{RowF}
+        Offline Service                                                                                                                                                                          &
+        Offline holdings on device; secure local verification/recording; device-to-device offline payments; online reconciliation after reconnection; loss/theft recovery handling.              &
+        PSP (distribution, devices, support) + Eurosystem/DESP (offline model / scheme controls)                                                                                                 &
+        Enable offline-capable form factors; implement offline risk controls and recovery workflows; reconcile offline transactions into PSP ledgers and DESP records; handle customer support processes.                          \\
+
+        \bottomrule
+    \end{tabularx}
+
+    \caption{Digital euro service bundles, responsibilities, and bank integration touchpoints.}
+    \label{tab:deuro_services_integration_aligned}
+\end{table}
+
+\section{Bank Back-End System Integration Pathways}
+
+% Notes:
+% - DESP = Digital Euro Service Platform
+% - DEAN = Digital Euro Account Number (scheme identifier)
+% - DCA = Digital euro account / DCA management (ECB architecture uses "DCA Management")
+% - Keep fee/billing optional (policy-dependent)
+
+\definecolor{HeaderBlue}{RGB}{210,228,255}
+\definecolor{BodyTint}{RGB}{236,246,255}
+
+\begin{xltabular}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm} X X}
+    \caption{Bank integration dimensions for DESP connectivity and internal system impacts.}
+    \label{tab:bank_desp_integration_matrix}\\
+    \toprule
+    \rowcolor{HeaderBlue}
+    \textbf{Dimension} & \textbf{What changes (capabilities)} & \textbf{Primary bank systems impacted} \\
+    \midrule
+    \endfirsthead
+
+    \toprule
+    \rowcolor{HeaderBlue}
+    \textbf{Dimension} & \textbf{What changes (capabilities)} & \textbf{Primary bank systems impacted} \\
+    \midrule
+    \endhead
+
+    \midrule
+    \multicolumn{3}{r}{\emph{Continued on next page}}\\
+    \endfoot
+
+    \bottomrule
+    \endlastfoot
+
+    \rowcolor{BodyTint}
+    Core banking / ledger integration &
+    Customer reference mapping (Customer ID $\leftrightarrow$ DEAN), alias linkage (via scheme services),
+    holding-limit outcomes and automated liquidity logic (waterfall / reverse-waterfall),
+    sub-ledger postings for funding/defunding and digital-euro account movements (DCA),
+    statement views and internal accounting alignment. &
+    Customer master/reference data, limits engine, sub-ledger/GL, accounting rules,
+    statement engine, billing/invoicing and product configuration. \\
+
+    \rowcolor{BodyTint}
+    Integration layer (DESP connectivity) &
+    Secure connector to DESP access gateway; API orchestration for funding/defunding and payment flows;
+    mapping/transformation between internal formats and scheme messages; eventing, monitoring,
+    resiliency patterns (retries, idempotency) and operational dashboards. &
+    API management gateway, ESB, message bus/streaming, workflow/orchestration engine,
+    monitoring/observability tooling. \\
+
+    \rowcolor{BodyTint}
+    Channels (customer + merchant) &
+    Mobile/web UX for digital euro services; receipts and notifications; optional branch-assisted flows;
+    acceptance/acquiring enablement where the bank is a merchant service provider. &
+    Mobile/web apps, notification services,
+    ATM switch, merchant portal. \\
+
+    \rowcolor{BodyTint}
+    Back-office operations &
+    Treasury operations for funding/defunding monitoring and replenishment; AML/CFT and fraud controls;
+    dispute intake and case handling; customer support; reconciliation and regulatory/statistical reporting. &
+    Treasury systems, compliance screening, fraud engine, dispute/case tooling,
+    call-centre platform, reconciliation \& reporting stack / data warehouse. \\
+
+    \rowcolor{BodyTint}
+    Security \& key management &
+    Strong identity and access controls for DESP connectivity; key/certificate lifecycle (signing/encryption);
+    secure secrets storage; security logging and auditability; incident monitoring and response playbooks. &
+    IAM, PKI/certificate management, HSM/secrets vault, log management, audit tooling. \\
+
+\end{xltabular}
+
+% \newpage
+% \subsubsection{Data Model Mapping}
+
+% The digital euro scheme uses specific identifiers and message elements that PSPs
+% must map to internal representations and lifecycle processes.
+
+% \begin{table}[H]
+%   \centering
+%   \small
+%   \setlength{\tabcolsep}{5pt}
+%   \renewcommand{\arraystretch}{1.15}
+%   \definecolor{TableHeader}{RGB}{180,180,180}
+%   \definecolor{RowA}{RGB}{222,222,222}
+
+%   \begin{tabularx}{\textwidth}{
+%     >{\raggedright\arraybackslash}p{3.0cm}
+%     X
+%     >{\raggedright\arraybackslash}p{4.3cm}
+%   }
+%     \toprule
+%     \rowcolor{TableHeader}
+%     \textbf{Scheme artefact} &
+%     \textbf{Meaning in the scheme} &
+%     \textbf{PSP internal mapping (recommended)} \\
+%     \midrule
+
+%     \rowcolor{RowA}
+%     DEAN (Digital Euro Account Number) &
+%     Unique identifier of a digital euro payment account used within scheme processes
+%     (e.g., onboarding/switching and transaction referencing). &
+%     Maintain Customer/Wallet-ID $\leftrightarrow$ DEAN in a dedicated reference store;
+%     support lifecycle events (provisioning, switching/account portability, offboarding). \\
+
+%     \rowcolor{RowA}
+%     Alias &
+%     User-friendly pseudonymous identifier used to initiate payments (e.g., phone/email/other);
+%     stored in the scheme's alias look-up service and linked to the user's DEAN and the relevant PSP
+%     (access manager) identifier. &
+%     Maintain {Alias $\leftrightarrow$ DEAN} locally for performance and user support;
+%     enforce consent, authentication and ownership checks; propagate updates/deactivation promptly;
+%     keep a traceable history for dispute/fraud investigations. \\
+
+%     \rowcolor{RowA}
+%     PSP Identifier / Access Manager Identifier &
+%     Identifier of the PSP responsible for providing access services for a given user/account;
+%     used by the scheme to route look-ups and interactions to the correct intermediary. &
+%     Maintain a master mapping of scheme PSP ID $\leftrightarrow$ internal PSP entity/tenant;
+%     use it in routing rules. \\
+
+%     % \rowcolor{RowA}
+%     % Transaction data elements (scheme message fields) &
+%     % Standardised transaction fields for initiation, validation and settlement instruction,
+%     % reusing existing industry standards where applicable (e.g., ISO 20022 data dictionary)
+%     % and adding digital-euro-specific elements as required by scheme interfaces. &
+%     % Implement a canonical mapping layer: internal payment object $\rightarrow$ scheme message;
+%     % apply versioned transformations, strict validation, idempotency keys, and audit logging;
+%     % maintain backward compatibility across interface versions. \\
+
+%     \bottomrule
+%   \end{tabularx}
+
+%   \caption{Core mapping objects required for PSP integration with the digital euro scheme.}
+%   \label{tab:deuro_core_mapping_objects}
+% \end{table}
+
+% \subsubsection{Liquidity Management Integration: DCA Operations}
+
+% The digital euro account used for settlement and liquidity movements (DCA) links
+% PSP-side liquidity actions (funding/defunding) to the Eurosystem/DESP ledger and
+% holding-limit automation.
+
+% \begingroup
+% \small
+% \setlength{\tabcolsep}{5pt}
+% \renewcommand{\arraystretch}{1.2}
+
+% \definecolor{HeaderGray}{RGB}{211,211,211}
+
+% \begin{xltabular}{\textwidth}{
+%   >{\raggedright\arraybackslash}p{3.0cm}
+%   >{\RaggedRight\arraybackslash}X
+%   >{\raggedright\arraybackslash}p{3.6cm}
+% }
+%   \caption{DCA-linked liquidity flows in the digital euro scheme: funding, defunding, waterfall and reverse-waterfall.}
+%   \label{tab:dca_flows_matrix}\\
+
+%   \toprule
+%   \rowcolor{HeaderGray}
+%   \textbf{Flow} & \textbf{Trigger \& business meaning} & \textbf{Key DCA implication (PSP + DESP)} \\
+%   \midrule
+%   \endfirsthead
+
+%   \caption[]{DCA-linked liquidity flows in the digital euro scheme (continued).}\\
+%   \toprule
+%   \rowcolor{HeaderGray}
+%   \textbf{Flow} & \textbf{Trigger \& business meaning} & \textbf{Key DCA implication (PSP + DESP)} \\
+%   \midrule
+%   \endhead
+
+%   \midrule
+%   \multicolumn{3}{r}{\small\itshape Continued on next page}\\
+%   \endfoot
+
+%   \bottomrule
+%   \endlastfoot
+
+%   Funding (top-up) &
+%   Customer initiates conversion from private money (commercial bank money) to digital euro (wallet funding). &
+%   DESP credits the user’s digital euro holdings; the PSP’s settlement/liquidity position linked to DCA is adjusted accordingly and reconciled against central bank money settlement rails as applicable. \\ \addlinespace
+
+%   Defunding (withdrawal) &
+%   Customer initiates conversion from digital euro back to a linked private-money account. &
+%   DESP debits the user’s digital euro holdings; the PSP receives the corresponding liquidity outcome via its DCA-related position and credits the customer’s linked account; postings and reconciliations must match DESP confirmations. \\ \addlinespace
+
+%   Waterfall (defunding on overflow) &
+%   Automatic conversion of excess digital euro into private money when an incoming amount would breach the holding limit. &
+%   The amount above the limit is automatically defunded: digital euro is reduced by the overflow portion and the linked private-money account is credited; PSP liquidity/DCA-related balances reflect the automated flow and must be transparently reported to the customer. \\ \addlinespace
+
+%   Reverse waterfall (auto-funding for payment) &
+%   A payment exceeds the user’s current digital euro holdings; the shortfall is automatically funded from the linked private-money account (if enabled by user settings and scheme rules). &
+%   The PSP must support an automated funding leg in real time to complete the payment; requires strong controls (user consent/settings, authentication, limit checks) and robust failure-handling to avoid partial or inconsistent postings. \\
+
+% \end{xltabular}
+% \endgroup
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth, height=0.9\textheight, keepaspectratio]{./5.1.1_Integration with Existing SystemsDigitalEuroLayer_Containers.png}
+    \caption{Integration with Existing Systems}
+    \label{fig:integration-existing-systems}
+\end{figure}
+
+\section{Technical Architecture}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./8.1_Implementation ArchitectureContainerView_Impl_Architecture.png}
+    \caption{High-level technical architecture for bank integration with the Digital Euro Service Platform (DESP).}
+    \label{fig:de_architecture}
+\end{figure}
+
+\section{Implementation Models}
+\subsection{In-House Implementation}
+\begin{itemize}
+    \item \textbf{Team Requirements: }  Backend Developers, Platform Architects, DevOps/SRE Engineers, QA/Testing Engineers, Security Engineers, Product/Business Analysts, Program/Project Manager,etc
+    \item \textbf{Cost Category: } Personnel (36–52), External consulting (architecture, security, regulatory testing support), Cloud + security infrastructure(K8s, compute, HSM/KMS,logs/monitoring), Tooling \& software licenses(DevSecOps, collaboration, security tooling), Independent testing (pentest, performance, audits), Training & professional development, and Contingency (10–15\%)
+    \item \textbf{Total Cost Estimates:} \EUR 24.2M - \EUR 57.2M
+    \item  \textbf{Risk Profile:} Legacy integration complexity, security vulnerabilities, etc
+\end{itemize}
+
+\subsection{Vendor/Outsourced Implementation}
+\begin{itemize}
+    \item \textbf{Vendor examples:} Pan-European payment processors / infrastructure providers (e.g., Worldline, equensWorldline)
+    \item \textbf{Service Model Options}
+          \begin{enumerate}
+              \item Full-service platform model (“Digital Euro as a Service”)
+              \item Component outsourcing model
+          \end{enumerate}
+    \item \textbf{Cost Category:} Personnel (8-12), Vendor onboarding \& platform setup, External integration/architecture support, Security & compliance testing, Training (ops, support, compliance, IT), and Contingency (10-15\%)
+    \item \textbf{Total Cost Estimates:} \EUR 4.1M - \EUR 8.5M
+    \item  \textbf{Risk Profile:} Limited customization, Third-party risk, Vendor lock-in etc
+\end{itemize}
+
+\subsection{Hybrid Implementation}
+\begin{itemize}
+    \item \textbf{Team Requirements: }  Backend Developers, DevOps/SRE Engineers, QA/Testing Engineers, Security Engineers, Product and Operations Manager.
+    \item \textbf{Cost Category:} Personnel (15–25), Vendor core platform onboarding/implementation, Consulting, Testing, security, Tooling, Training and contingency (10-15\%).
+    \item \textbf{Total Cost Estimates:} \EUR 13.3M - \EUR 26.1M
+    \item  \textbf{Risk Profile:} Integration boundary complexity, dependency management, security coordination, etc
+\end{itemize}
+
+\section{Implementation Models by Bank Tier}
+
+\subsection{High-Tier Banks}
+\begin{itemize}
+    \item \textbf{Bank Profile:} Greater than \EUR 300B
+    \item \textbf{Recommended Implementation Approach:} In-House with Selective Partnerships
+    \item \textbf{Core Strategy:}
+          \begin{itemize}
+              \item Develop comprehensive in-house Digital Euro platform
+              \item Utilize selective partnerships for specialized components
+          \end{itemize}
+    \item \textbf{Implementation Architecture}
+          \begin{enumerate}
+              \item \textbf{Tier 1 : Core Development (In-House) - Core Platform Components}
+                    \begin{itemize}
+                        Access Management Service, Liquidity Management Service, Transaction Management Service, Risk and Compliance Service
+                    \end{itemize}
+              \item \textbf{Tier 2 : Channel Integration (In-House + Partnerships) - Distribution Channels}
+                    \begin{itemize}
+                        Mobile Banking, Web Banking, POS \& Merchant, ATM Network
+                    \end{itemize}
+              \item \textbf{Tier 3 : Advanced Services (In-House Development)}
+                    \begin{itemize}
+                        Conditional Payments, Loyalty \& Rewards, Blockchain Integration (Future)
+                    \end{itemize}
+          \end{enumerate}
+\end{itemize}
+
+\subsection{Mid-Tier Banks}
+\begin{itemize}
+    \item \textbf{Bank Profile:} \EUR 50 - \EUR 300B
+    \item \textbf{Recommended Implementation Approach:} Hybrid Implementation with Vendor Partnerships
+    \item \textbf{Core Strategy:}
+          \begin{itemize}
+              \item Outsource core integration via vendor platform
+              \item Develop selective proprietary services for differentiation
+              \item Leverage vendor expertise while controlling costs
+              \item Achieve faster time-to-market than full in-house development
+          \end{itemize}
+    \item \textbf{Implementation Architecture}
+          \begin{enumerate}
+              \item \textbf{Tier 1: Vendor-Managed Core Components}
+                    \begin{itemize}
+                        Access Management Service, Liquidity Management Service, Transaction Management Service, Risk and Compliance Service
+                    \end{itemize}
+              \item \textbf{Tier 2: Shared Infrastructure (Market-Based Collaboration)}
+                    \begin{itemize}
+                        Shared infrastructure (POS/terminal), Shared Fraud Detection Consortium, Shared ATM Network Operations, Shared Testing Infrastructure
+                    \end{itemize}
+              \item \textbf{Tier 3: Bank-Developed Differentiation (Services)}
+                    \begin{itemize}
+                        Enhanced Customer Experience, Conditional Payments, Loyalty \& Rewards, promotions
+                    \end{itemize}
+          \end{enumerate}
+\end{itemize}
+
+\subsection{Low-Tier Banks}
+\begin{itemize}
+    \item \textbf{Bank Profile:} Less than \EUR 50B
+    \item \textbf{Recommended Implementation Approach:} Vendor-provided platform with minimal customization.
+    \item \textbf{Core Strategy:}
+
+          \begin{itemize}
+              \item Engage established vendor for end-to-end Digital Euro platform
+              \item Minimize internal development and complexity
+          \end{itemize}
+    \item \textbf{Implementation Architecture}
+          \begin{enumerate}
+              \item \textbf{Vendor Platform - Vendor-Provided Services}
+                    \begin{itemize}
+                        Access Management Service, Liquidity Management Service, Transaction Management Service, Risk and Compliance Service, Channel Integration, Reporting and Reconciliation, Operational Monitoring
+
+                    \end{itemize}
+              \item \textbf{Bank-Specific Configuration}
+                    \begin{itemize}
+                        Brand integration, Customer support, Staff training, etc
+                    \end{itemize}
+
+          \end{enumerate}
+\end{itemize}
+
+\section{Shared Infrastructure}
+\begin{itemize}
+    \item Shared Testing Infrastructure
+    \item Shared Fraud Detection and AML Services
+    \item Shared ATM Network Operations
+    \item Shared Digital Euro as a Service (DaaS) Platform
+\end{itemize}
+
+\section{Recommendations by Bank Tier}
+\begin{itemize}
+    \item High-tier banks (large, internationally active): In-house or Hybrid approach.
+    \item Mid-tier banks (regional to multi-market): Hybrid as the default strategy.
+    \item Low-tier banks (small, local): Vendor-provided platform with minimal
+          customization.
+\end{itemize}
+\end{document}

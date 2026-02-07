@@ -1,0 +1,258 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{BIS-E-CNY}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=33c1a080b8354bb52a758f9c585eaff7}{%
+           family={{BIS.org}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{fullhash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{fullhashraw}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{bibnamehash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{authorbibnamehash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{authornamehash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{authorfullhash}{33c1a080b8354bb52a758f9c585eaff7}
+      \strng{authorfullhashraw}{33c1a080b8354bb52a758f9c585eaff7}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{E-CNY: main objectives, guiding principles andinclusion considerations}
+      \verb{urlraw}
+      \verb https://www.bis.org/publ/bppdf/bispap123_e.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bis.org/publ/bppdf/bispap123_e.pdf
+      \endverb
+    \endentry
+    \entry{centralbankbahamas}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=3e6675a040a071a0975f67d5e2a6d92b}{%
+           family={{Central Bank of Bahamas}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{fullhash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{fullhashraw}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{bibnamehash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{authorbibnamehash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{authornamehash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{authorfullhash}{3e6675a040a071a0975f67d5e2a6d92b}
+      \strng{authorfullhashraw}{3e6675a040a071a0975f67d5e2a6d92b}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{Bahamas Sand Dollar}
+      \verb{urlraw}
+      \verb https://www.centralbankbahamas.com/news/public-notices/the-sand-dollar-is-on-schedule-for-gradual-national-release-to-the-bahamas-in-mid-october-2020
+      \endverb
+      \verb{url}
+      \verb https://www.centralbankbahamas.com/news/public-notices/the-sand-dollar-is-on-schedule-for-gradual-national-release-to-the-bahamas-in-mid-october-2020
+      \endverb
+    \endentry
+    \entry{ecbCost}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=fc0835c66c6644c8a6ca0239bce9cc73}{%
+           family={{European Central Bank}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{bibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorbibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authornamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \field{extraname}{1}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{A view on recent assessments of digital euro investment costs for the euro area banking sector}
+      \verb{urlraw}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/progress/shared/pdf/ecb.deprp202510.en.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/progress/shared/pdf/ecb.deprp202510.en.pdf
+      \endverb
+    \endentry
+    \entry{ecbPrep}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=fc0835c66c6644c8a6ca0239bce9cc73}{%
+           family={{European Central Bank}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{bibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorbibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authornamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \field{extraname}{2}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{Progress on the preparation phase of a digital euro: Closing progress report}
+      \verb{urlraw}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/progress/shared/pdf/ecb.deprp202510.en.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/progress/shared/pdf/ecb.deprp202510.en.pdf
+      \endverb
+    \endentry
+    \entry{ecbRuleBook}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=fc0835c66c6644c8a6ca0239bce9cc73}{%
+           family={{European Central Bank}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{fullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{bibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorbibnamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authornamehash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhash}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \strng{authorfullhashraw}{fc0835c66c6644c8a6ca0239bce9cc73}
+      \field{extraname}{3}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{Update on the work of the digital euro scheme’s Rulebook Development Group}
+      \verb{urlraw}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/timeline/profuse/shared/pdf/ecb.derdgp251030_RDG_progress_report_October_25.en.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ecb.europa.eu/euro/digital_euro/timeline/profuse/shared/pdf/ecb.derdgp251030_RDG_progress_report_October_25.en.pdf
+      \endverb
+    \endentry
+    \entry{PwC}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=61835b68ccef417c7b0f4743bc983d0a}{%
+           family={{PwC}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{fullhash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{fullhashraw}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{bibnamehash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{authorbibnamehash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{authornamehash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{authorfullhash}{61835b68ccef417c7b0f4743bc983d0a}
+      \strng{authorfullhashraw}{61835b68ccef417c7b0f4743bc983d0a}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{Digital Euro Cost Study}
+      \verb{urlraw}
+      \verb https://www.pwc.de/de/finanzdienstleistungen/pwc-digital-euro-cost-study-2025.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.pwc.de/de/finanzdienstleistungen/pwc-digital-euro-cost-study-2025.pdf
+      \endverb
+    \endentry
+    \entry{E-krona-riksbank}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=1d6295ae48bbc2eb6ad19515812d0fda}{%
+           family={{riksbank}},
+           familyi={r\bibinitperiod}}}%
+      }
+      \strng{namehash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{fullhash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{fullhashraw}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{bibnamehash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{authorbibnamehash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{authornamehash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{authorfullhash}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \strng{authorfullhashraw}{1d6295ae48bbc2eb6ad19515812d0fda}
+      \field{sortinit}{r}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{E-krona pilot Phase 4 report}
+      \verb{urlraw}
+      \verb https://www.riksbank.se/globalassets/media/rapporter/e-krona/2024/e-krona-pilot-phase-4.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.riksbank.se/globalassets/media/rapporter/e-krona/2024/e-krona-pilot-phase-4.pdf
+      \endverb
+    \endentry
+    \entry{SandDollar}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=f42464350d48fbf549b486fb5bab3260}{%
+           family={{SandDollarBS}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{fullhash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{fullhashraw}{f42464350d48fbf549b486fb5bab3260}
+      \strng{bibnamehash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{authorbibnamehash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{authornamehash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{authorfullhash}{f42464350d48fbf549b486fb5bab3260}
+      \strng{authorfullhashraw}{f42464350d48fbf549b486fb5bab3260}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{PDF}
+      \field{title}{Bahamas Sand Dollar}
+      \verb{urlraw}
+      \verb https://www.sanddollar.bs/individual
+      \endverb
+      \verb{url}
+      \verb https://www.sanddollar.bs/individual
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{AMLR2024}
+  \missing{DORA2022}
+  \missing{EBAGL_ICT_2019}
+  \missing{EBA_GL_Outsourcing}
+  \missing{ECB2023MarketResearchAnnex}
+  \missing{ECB2025RDGProgressOct}
+  \missing{ECB2025RulebookV09}
+  \missing{ECB_DE_PrivacyMain}
+  \missing{ECB_DE_PrivacyOfflineFAQ}
+  \missing{EC_PSD_FAQ_2023}
+  \missing{EU_SanctionsMap}
+  \missing{GDPR2016}
+  \missing{ecbRdgProgress2025}
+  \missing{ecbRulebook2025}
+\endrefsection
+\endinput
+
